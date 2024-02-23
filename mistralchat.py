@@ -41,9 +41,9 @@ def ask_mistral_sentiment(model: str, review: str) -> str:
 
     # },])
     
-    oneshot = prompt.oneshot()
+    zeroshot = prompt.zeroshot()
     
-    response = ollama.chat(model=model, messages=[oneshot.sentiment_basics(review)])
+    response = ollama.chat(model=model, messages=[zeroshot.sentiment_basics(review)])
     
     if model == "mistral":
         answer = response["message"]["content"][1:].replace(".", "").lower()

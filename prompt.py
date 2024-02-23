@@ -3,7 +3,7 @@ MESSAGE_TEMPLATE = {
     "content": None
 }
 
-class oneshot():
+class zeroshot():
     def __init__(self) -> None:
         self.message_template = MESSAGE_TEMPLATE
 
