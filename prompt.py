@@ -7,6 +7,10 @@ class zeroshot():
     def __init__(self) -> None:
         self.message_template = MESSAGE_TEMPLATE
 
+    def ask(self, message):
+        self.message_template["content"] = message
+        return self.message_template
+
     def sentiment_basics(self, review: str) -> dict:
 
         self.message_template["content"] = f"Give me the sentiment of this review: '{review}'"

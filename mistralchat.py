@@ -60,12 +60,9 @@ def ask_mistral_sentiment(model: str, review: str) -> str:
 
 def ask_mistral(model: str, message: str) -> str:
     
-    response = ollama.chat(model=model, messages=[{
-
-        "role": "user",
-        "content": message,
-
-    },])
+    zeroshot = prompt.zeroshot()
+    
+    response = ollama.chat(model=model, messages=[zeroshot.ask(message)])
 
     return response["message"]["content"][1:]
 
@@ -73,12 +70,13 @@ if __name__ == "__main__":
 
     message, model = parse_arguements()
 
-    print(f"{model} has been loaded")
+    print(f"{model} has been loaded\n")
     
     
     data = pd.read_csv("./data/IMDB_Dataset.csv")
     
-    print(ask_mistral(model, message[0]))
+    if message is not None:
+        print(ask_mistral(model, message[0]))
     
     # if len(message) > 1:
         # for msg in message:
@@ -90,6 +88,8 @@ if __name__ == "__main__":
 
 
     # for idx in tqdm(data.index):
+    
+if False:
     
     for idx in data.index:
         
