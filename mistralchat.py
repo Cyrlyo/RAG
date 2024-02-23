@@ -64,6 +64,8 @@ def ask_mistral(model: str, message: str) -> str:
     
     response = ollama.chat(model=model, messages=[zeroshot.ask(message)])
 
+    print(response["message"]["role"])
+
     return response["message"]["content"][1:]
 
 if __name__ == "__main__":
@@ -77,6 +79,14 @@ if __name__ == "__main__":
     
     if message is not None:
         print(ask_mistral(model, message[0]))
+    
+    if message is None:
+        
+        oneshot = prompt.oneshot()
+        _, __, ___ = oneshot.find_random_sample(data)
+        # ask_mistral(model, oneshot.sentiment_basic((oneshot.find_random_sample(data))))
+        print(ollama.chat(model=model, messages=[oneshot.sentiment_basic(_, __, ___)]))
+        
     
     # if len(message) > 1:
         # for msg in message:

@@ -8,7 +8,7 @@ def parse_arguements():
     parser = argparse.ArgumentParser()
     
     parser.add_argument("-m", "--message", type=str, nargs="*")
-    parser.add_argument("-l","--model", type=str, default="mistral", choices=["mistral", "llama2", "gemma"])
+    parser.add_argument("-l","--model", type=str, default="mistral", choices=["mistral", "llama2", "gemma", "gemma:2b", "gemma:7b "])
     
     args = parser.parse_args()
     
