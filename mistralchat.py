@@ -63,11 +63,9 @@ def ask_mistral(model: str, message: str) -> str:
     response = ollama.chat(model=model, messages=[{
 
         "role": "user",
-        "content": f"Give me the sentiment of this review: {message}",
+        "content": message,
 
     },])
-
-    print(message["message"]["content"][1:])
 
     return response["message"]["content"][1:]
 
@@ -79,6 +77,8 @@ if __name__ == "__main__":
     
     
     data = pd.read_csv("./data/IMDB_Dataset.csv")
+    
+    print(ask_mistral(model, message[0]))
     
     # if len(message) > 1:
         # for msg in message:
