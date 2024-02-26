@@ -28,7 +28,7 @@ except:
             None
             
 
-ollama = ollama.Client(host='http://localhost:11434')
+connection = ollama.Client(host='http://localhost:11434')
 
 
 
@@ -43,7 +43,7 @@ def ask_mistral_sentiment(model: str, review: str) -> str:
     
     zeroshot = prompt.zeroshot()
     
-    response = ollama.chat(model=model, messages=[zeroshot.sentiment_basics(review)])
+    response = connection.chat(model=model, messages=[zeroshot.sentiment_basics(review)])
     
     if model == "mistral":
         answer = response["message"]["content"][1:].replace(".", "").lower()
@@ -62,7 +62,7 @@ def ask_mistral(model: str, message: str) -> str:
     
     zeroshot = prompt.zeroshot()
     
-    response = ollama.chat(model=model, messages=[zeroshot.ask(message)])
+    response = connection.chat(model=model, messages=[zeroshot.ask(message)])
 
     print(response["message"]["role"])
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         oneshot = prompt.oneshot()
         _, __, ___ = oneshot.find_random_sample(data)
         # ask_mistral(model, oneshot.sentiment_basic((oneshot.find_random_sample(data))))
-        print(ollama.chat(model=model, messages=[oneshot.sentiment_basic(_, __, ___)]))
+        print(connection.chat(model=model, messages=[oneshot.sentiment_basic(_, __, ___)]))
         
     
     # if len(message) > 1:
